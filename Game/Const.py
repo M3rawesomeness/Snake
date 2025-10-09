@@ -1,9 +1,27 @@
+import pygame as pg
+
 gen_const = {
     "length": 800,
     "width": 800,
     "color": (50, 168, 82),
 
 }
+
+button_dict = {
+    "start": {
+        "pos": (50, 650),
+        "length": 300,
+        "width": 100,
+        "color": (50, 50, 100),
+    },
+    "quit": {
+        "pos": (550, 650),
+        "length": 300,
+        "width": 100,
+        "color": (50, 50, 100),
+    }
+}
+
 snake_const = {
     "starting_pos": (100, 100),
     "size": (25, 25),

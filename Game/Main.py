@@ -1,8 +1,12 @@
 import pygame as pg
+import pygame.mouse
+from pygame import MOUSEBUTTONDOWN
+
 import Snake
 import Apple
 import Physics
 from Const import gen_const
+from Const import button_dict
 
 pg.init()
 SCREEN_SIZE = (gen_const["length"], gen_const["width"])
@@ -11,12 +15,45 @@ clock = pg.time.Clock()
 screen = pg.display.set_mode(SCREEN_SIZE)
 pg.display.set_caption("SNAKE")
 
-"""def starting_menu() -> None:
+button_color = []
+keys = button_dict.keys()
+for key in keys:
+    button_color.append(button_dict[key]["color"])
+shift_in_color = 10
+
+button_color_prime = []
+for color in button_color:
+    for i in range(3):
+        button_color_prime.append(color[i] - shift_in_color)
+
+button_rect = []
+for key in keys:
+    button_rect.append(pg.Rect(button_dict[key]["pos"], (button_dict[key]["length"], button_dict[key]["width"])))
+
+
+def starting_menu() -> bool:
     running = True
     while running:
-        pass
+        screen.fill(gen_const["color"])
+        mouse_pos = pg.mouse.get_pos()
+        for event in pg.event.get():
+            if event.type == pg.QUIT:
+                return False
+            elif event.type == MOUSEBUTTONDOWN:
+                # TODO: check for mouse pos on specific rectangle, output its function
+                pass
+        i = 0
+        for rect in button_rect:
+            if rect.collidepoint(mouse_pos):
+                color = button_color_prime[i]
+            else:
+                color = button_color[i]
 
-"""
+            pg.draw.rect(screen, color, rect)
+
+            i += 1
+        pg.display.flip()
+    return True
 
 
 def main() -> None:
@@ -34,7 +71,8 @@ def main() -> None:
     num_of_apples_at_one_time: int = 1
     # Wall vars
     wall_rect = []
-    running: bool = True
+
+    running: bool = starting_menu()
     while running:
         # Event handling for closing the game
         for event in pg.event.get():
