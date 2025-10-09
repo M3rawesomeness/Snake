@@ -1,4 +1,9 @@
-r = (1, 1)
+def u(nums: list[int], thers: int) -> list:
+    return_num = []
+    for num in nums:
+        if num < thers:
+            return_num.append(num)
+    return return_num
 
-r = r[0] - 1, r[1] - 1
-print(r)
+
+print(u([], 7))

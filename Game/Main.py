@@ -14,21 +14,30 @@ clock = pg.time.Clock()
 screen = pg.display.set_mode(SCREEN_SIZE)
 pg.display.set_caption("SNAKE")
 
+button_keys = button_dict.keys()
 button_color = []
-keys = button_dict.keys()
-for key in keys:
-    button_color.append(button_dict[key]["color"])
-shift_in_color = 10
+for button in button_keys:
+    button_color.append(button_dict[button]["color"])
 
 button_color_prime = []
+shift_in_color = 10
 for color in button_color:
     current_color = []
     for i in range(3):
         current_color.append(color[i] - shift_in_color)
     button_color_prime.append(tuple(current_color))
-button_rect = []
-for key in keys:
-    button_rect.append(pg.Rect(button_dict[key]["pos"], (button_dict[key]["length"], button_dict[key]["width"])))
+
+button_rect = {}
+
+for button_name in button_keys:
+    button_rect[button_name] = pg.Rect(
+        button_dict[button_name]["pos"],
+        (
+            button_dict[button_name]["length"],
+            button_dict[button_name]["width"]
+        )
+    )
+print(button_rect)
 
 
 def starting_menu() -> bool:
@@ -40,10 +49,17 @@ def starting_menu() -> bool:
             if event.type == pg.QUIT:
                 return False
             elif event.type == MOUSEBUTTONDOWN:
-                # TODO: check for mouse pos on specific rectangle, output its function
-                pass
+                mouse_rect = pg.Rect(mouse_pos, (1, 1))
+                button_being_collided_with = mouse_rect.collidedict(button_rect, True)[0]  # Only the name is important
+                if button_being_collided_with == "start":
+                    return True
+                if button_being_collided_with == "quit":
+                    return False
+                if button_being_collided_with == "setting":
+                    # settings()
+                    pass
         i = 0
-        for rect in button_rect:
+        for rect in button_rect.values():  # here values is used as to get the rectangles in the Dictionary
             if rect.collidepoint(mouse_pos):
                 color = button_color_prime[i]
             else:
