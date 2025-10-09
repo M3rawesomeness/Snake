@@ -1,5 +1,4 @@
 import pygame as pg
-import pygame.mouse
 from pygame import MOUSEBUTTONDOWN
 
 import Snake
@@ -23,9 +22,10 @@ shift_in_color = 10
 
 button_color_prime = []
 for color in button_color:
+    current_color = []
     for i in range(3):
-        button_color_prime.append(color[i] - shift_in_color)
-
+        current_color.append(color[i] - shift_in_color)
+    button_color_prime.append(tuple(current_color))
 button_rect = []
 for key in keys:
     button_rect.append(pg.Rect(button_dict[key]["pos"], (button_dict[key]["length"], button_dict[key]["width"])))
@@ -50,7 +50,6 @@ def starting_menu() -> bool:
                 color = button_color[i]
 
             pg.draw.rect(screen, color, rect)
-
             i += 1
         pg.display.flip()
     return True
