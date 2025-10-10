@@ -19,7 +19,13 @@ button_dict = {
         "length": 300,
         "width": 100,
         "color": (100, 50, 50),
-    }
+    },
+    "setting": {
+        "pos": (),
+        "length": 0,
+        "width": 0,
+        "color": ()
+    },
 }
 
 snake_const = {
@@ -27,7 +33,7 @@ snake_const = {
     "size": (25, 25),
     "color": (50, 113, 170),
     "length": 3,
-    "increase": 5
+    "increase": 1
 }
 apple_const = {
     "color": (207, 46, 10),

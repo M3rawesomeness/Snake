@@ -40,6 +40,10 @@ for button_name in button_keys:
 
 
 def starting_menu() -> bool:
+    """
+    The starting menu for the game
+    :return: True if the game should continue, false if the player clicked quit
+    """
     running = True
     while running:
         screen.fill(gen_const["color"])
@@ -57,17 +61,25 @@ def starting_menu() -> bool:
                 if button_being_collided_with == "setting":
                     # settings()
                     pass
-        i = 0
+        _i = 0
         for rect in button_rect.values():  # here values is used as to get the rectangles in the Dictionary
             if rect.collidepoint(mouse_pos):
-                color = button_color_prime[i]
+                _color = button_color_prime[_i]
             else:
-                color = button_color[i]
+                _color = button_color[_i]
 
-            pg.draw.rect(screen, color, rect)
-            i += 1
+            pg.draw.rect(screen, _color, rect)
+            _i += 1
         pg.display.flip()
     return True
+
+
+def settings():
+    pass
+
+
+def menu():
+    pass
 
 
 def main() -> None:
@@ -99,7 +111,8 @@ def main() -> None:
         k = pg.key.get_pressed()
         if k[pg.K_q]:
             running = False
-
+        elif k[pg.K_ESCAPE]:
+            menu()
         # Redraws backgrounds
         screen.fill(gen_const["color"])
 
