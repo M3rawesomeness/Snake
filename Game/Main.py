@@ -37,7 +37,6 @@ for button_name in button_keys:
             button_dict[button_name]["width"]
         )
     )
-print(button_rect)
 
 
 def starting_menu() -> bool:
