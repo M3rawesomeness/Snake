@@ -4,7 +4,7 @@ gen_const = {
     "length": 800,
     "width": 800,
     "color": (50, 168, 82),
-
+    "color_shift": 10,
 }
 
 button_dict = {
@@ -20,20 +20,13 @@ button_dict = {
         "width": 100,
         "color": (100, 50, 50),
     },
-    "setting": {
-        "pos": (),
-        "length": 0,
-        "width": 0,
-        "color": ()
-    },
 }
-
 snake_const = {
     "starting_pos": (100, 100),
     "size": (25, 25),
     "color": (50, 113, 170),
     "length": 3,
-    "increase": 1
+    "increase": 5
 }
 apple_const = {
     "color": (207, 46, 10),
