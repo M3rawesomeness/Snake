@@ -1,9 +1,9 @@
 import pygame as pg
-from pygame import MOUSEBUTTONDOWN
-
+import Menu
 import Snake
 import Apple
 import Physics
+
 from Const import gen_const
 from Const import button_dict
 
@@ -39,49 +39,6 @@ for button_name in button_keys:
     )
 
 
-def starting_menu() -> bool:
-    """
-    The starting menu for the game
-    :return: True if the game should continue, false if the player clicked quit
-    """
-    running = True
-    while running:
-        screen.fill(gen_const["color"])
-        mouse_pos = pg.mouse.get_pos()
-        for event in pg.event.get():
-            if event.type == pg.QUIT:
-                return False
-            elif event.type == MOUSEBUTTONDOWN:
-                mouse_rect = pg.Rect(mouse_pos, (1, 1))
-                button_being_collided_with = mouse_rect.collidedict(button_rect, True)[0]  # Only the name is important
-                if button_being_collided_with == "start":
-                    return True
-                if button_being_collided_with == "quit":
-                    return False
-                if button_being_collided_with == "setting":
-                    # settings()
-                    pass
-        _i = 0
-        for rect in button_rect.values():  # here values is used as to get the rectangles in the Dictionary
-            if rect.collidepoint(mouse_pos):
-                _color = button_color_prime[_i]
-            else:
-                _color = button_color[_i]
-
-            pg.draw.rect(screen, _color, rect)
-            _i += 1
-        pg.display.flip()
-    return True
-
-
-def settings():
-    pass
-
-
-def menu():
-    pass
-
-
 def main() -> None:
     delta: float = 0.0
     snake = Snake.SnakeBody(screen)
@@ -98,7 +55,10 @@ def main() -> None:
     # Wall vars
     wall_rect = []
 
-    running: bool = starting_menu()
+    menu = Menu.Menu(screen)
+
+    menu.starting_menu()
+    running = True
     while running:
         # Event handling for closing the game
         for event in pg.event.get():
@@ -112,7 +72,7 @@ def main() -> None:
         if k[pg.K_q]:
             running = False
         elif k[pg.K_ESCAPE]:
-            menu()
+            menu.starting_menu()
         # Redraws backgrounds
         screen.fill(gen_const["color"])
 
