@@ -1,1 +1,1 @@
-Hi this is a snake game I am making, for funzies
+Hi this is a snake game I am making
